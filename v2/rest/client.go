@@ -6,7 +6,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/bitfinexcom/bitfinex-api-go/utils"
+	"github.com/dannyluong408/bitfinex-api-go/utils"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -36,6 +36,7 @@ type Client struct {
 	Trades    TradeService
 	Platform  PlatformService
 	Book      BookService
+	Candles 	CandleService
 
 	Synchronous
 }
@@ -91,6 +92,7 @@ func NewClientWithSynchronousURLNonce(sync Synchronous, url string, nonce utils.
 	c.Trades = TradeService{Synchronous: c, requestFactory: c}
 	c.Platform = PlatformService{Synchronous: c}
 	c.Positions = PositionService{Synchronous: c, requestFactory: c}
+	c.Candles = CandleService{Synchronous: c,}
 	return c
 }
 
