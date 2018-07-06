@@ -44,22 +44,3 @@ type Candle struct {
 	Close                    string `json:"close"`
 	Volume                   string `json:"volume"`
 }
-
-
-func main() {
-	symbol := "tBTCUSD"
-	interval := "1m"
-  start := 1516435200000
-  end := 1516867200000
-
-	client := NewClient("", "")
-	klines, err := client.NewKlinesService().Symbol(symbol).
-		Interval(interval).Do(context.Background())
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	for _, k := range klines {
-		fmt.Println(k)
-	}
-}
