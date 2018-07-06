@@ -34,11 +34,10 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
   res = make([]*bitfinex.Candle, num)
 
   for i := 0; i < num; i++ {
-			raw := strings.Fields(fmt.Sprintf("%v", data[i]))
-			fields := raw[1:len(raw)-1]
-			for _, res := range fields{
-				fmt.Println(res)
-			}
+			fields := strings.Fields(fmt.Sprintf("%v", data[i]))
+			fields = fields[1:len(fields)-1]
+			fmt.Println(fields)
+			
 			timestamp, err := strconv.ParseInt(fields[2], 10, 64)
 			if err != nil {
 				fmt.Println("parse int ts failed")
