@@ -1,8 +1,8 @@
 package rest
 
 import (
-	bitfinex "github.com/dannyluong408/bitfinex-api-go/v2"
 	"fmt"
+	"reflect"
 )
 
 type CandleService struct {
@@ -25,23 +25,24 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 	// fmt.Println(data)
 	// fmt.Println("3:")
 	// fmt.Println(len(data))
-	// fmt.Println("4:")
-	// fmt.Println(reflect.TypeOf(data[0]))
-	// fmt.Println("5:")
-	// fmt.Println(data[0])
-  num := len(rawdata)
-  res = make([]*Candle, num)
-  for i := 0; i < num; i++ {
-		data := rawdata[i]
-    res[i] = &Candle{
-			Timestamp:                bitfinex.i64ValOrZero(data[0]),
-			Open:                     sValOrEmpty(data[1]),
-			High:                     sValOrEmpty(data[2]),
-			Low:                      sValOrEmpty(data[3]),
-			Close:                    sValOrEmpty(data[4]),
-			Volume:                   sValOrEmpty(data[5]),
-		}
-  }
+	fmt.Println("4:")
+	fmt.Println(reflect.TypeOf(data[0]))
+	fmt.Println("5:")
+	fmt.Println(data[0])
+	fmt.Println(len(data[0]))
+  // num := len(rawdata)
+  // res = make([]*Candle, num)
+  // for i := 0; i < num; i++ {
+	// 	data := rawdata[i]
+  //   res[i] = &Candle{
+	// 		Timestamp:                bitfinex.i64ValOrZero(data[0]),
+	// 		Open:                     sValOrEmpty(data[1]),
+	// 		High:                     sValOrEmpty(data[2]),
+	// 		Low:                      sValOrEmpty(data[3]),
+	// 		Close:                    sValOrEmpty(data[4]),
+	// 		Volume:                   sValOrEmpty(data[5]),
+	// 	}
+  // }
 	return res, nil
 }
 
