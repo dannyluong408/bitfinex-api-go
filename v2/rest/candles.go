@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"github.com/dannyluong408/bitfinex-api-go/utils"
 	"fmt"
 	"reflect"
 )
@@ -12,45 +13,35 @@ type CandleService struct {
 // Gets KLine History using v2 api
 func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, end int64) (res []*Candle, err error) {
   endpoint := "candles/trade:" + timeframe + ":" + symbol + "/hist?start=" + string(start) + "&end=" + string(end)
-	data, err := p.Request(NewRequestWithMethod(endpoint, "GET"))
+	rawdata, err := p.Request(NewRequestWithMethod(endpoint, "GET"))
 
 	if err != nil {
 		fmt.Println("Endpoint Failed")
 		return []*Candle{}, err
 	}
 
-  fmt.Println("1:")
-	fmt.Println(reflect.TypeOf(data))
-	fmt.Println("2:")
-	fmt.Println(data)
-	fmt.Println("3:")
-	fmt.Println(len(data))
-	fmt.Println("4:")
-	fmt.Println(reflect.TypeOf(data[0]))
-	fmt.Println("5:")
-	fmt.Println(data[0])
-
-	describe(data[0])
-
-	fmt.Println(data.GetIndex(0))
-	// fmt.Println("6:")
-	// fmt.Println(len(data[0]))
-	// fmt.Println("7:")
-	// fmt.Println(data[0][0])
-
-  num := len(data)
+  // fmt.Println("1:")
+	// fmt.Println(reflect.TypeOf(data))
+	// fmt.Println("2:")
+	// fmt.Println(data)
+	// fmt.Println("3:")
+	// fmt.Println(len(data))
+	// fmt.Println("4:")
+	// fmt.Println(reflect.TypeOf(data[0]))
+	// fmt.Println("5:")
+	// fmt.Println(data[0])
+  num := len(rawdata)
   res = make([]*Candle, num)
-  // for i := 0; i < num; i++ {
-  //   item := data.GetIndex(i)
-  //   res[i] = &Candle{
-	// 		Timestamp:                item.GetIndex(0).MustInt64(),
-	// 		Open:                     item.GetIndex(1).MustString(),
-	// 		High:                     item.GetIndex(2).MustString(),
-	// 		Low:                      item.GetIndex(3).MustString(),
-	// 		Close:                    item.GetIndex(4).MustString(),
-	// 		Volume:                   item.GetIndex(5).MustString(),
-	// 	}
-  // }
+  for i := 0; i < num; i++ {
+    res[i] = &Candle{
+			Timestamp:                i64ValOrZero(rawdata[0]),
+			Open:                     sValOrEmpty(rawdata[1]),
+			High:                     sValOrEmpty(rawdata[2]),
+			Low:                      sValOrEmpty(rawdata[3]),
+			Close:                    sValOrEmpty(rawdata[4]),
+			Volume:                   sValOrEmpty(rawdata[5]),
+		}
+  }
 	return res, nil
 }
 
@@ -62,8 +53,4 @@ type Candle struct {
 	Low                      string `json:"low"`
 	Close                    string `json:"close"`
 	Volume                   string `json:"volume"`
-}
-
-func describe(i interface{}) {
-	fmt.Printf("(%v, %T)\n", i, i)
 }
