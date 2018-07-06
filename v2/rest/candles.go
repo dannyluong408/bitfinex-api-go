@@ -38,15 +38,22 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 			for _, res := range fields{
 				fmt.Println(res)
 			}
+			timestamp, err := strconv.ParseInt(fields[2], 10, 64)
+			open, err := strconv.ParseFloat(fields[3], 64)
+			high, err := strconv.ParseFloat(fields[4], 64)
+			low, err := strconv.ParseFloat(fields[5], 64)
+			close, err := strconv.ParseFloat(fields[6], 64)
+			vol, err := strconv.ParseFloat(fields[7], 64)
+
 			res[i] = &bitfinex.Candle{
 				Symbol:     symbol,
 				Resolution: resolution,
-				MTS:        strconv.ParseInt(fields[2], 64),
-				Open:       strconv.ParseFloat(fields[3], 64),
-				Close:      strconv.ParseFloat(fields[4], 64),
-				High:       strconv.ParseFloat(fields[5], 64),
-				Low:        strconv.ParseFloat(fields[6], 64),
-				Volume:     strconv.ParseFloat(fields[7], 64),
+				MTS:        timestamp,
+				Open:       open,
+				Close:      close,
+				High:       high,
+				Low:        low,
+				Volume:     vol,
 			}
   }
 
