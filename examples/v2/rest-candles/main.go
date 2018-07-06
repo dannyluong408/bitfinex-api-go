@@ -30,7 +30,9 @@ func main() {
 
 	result, err := c.Candles.GetOHLCV(timeframe, symbol, start, end)
 	fmt.Println(reflect.TypeOf(result))
-	fmt.Println(result)
+	for _, c := range result {
+			fmt.Println(c)
+	}
 	if err != nil {
 		fmt.Println("Error!")
 	}
