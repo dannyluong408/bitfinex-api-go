@@ -2,7 +2,7 @@ package rest
 
 import (
 	"fmt"
-	"github.com/dannyluong408/bitfinex-api-go/v2"
+	// "github.com/dannyluong408/bitfinex-api-go/v2"
 	"reflect"
 )
 
@@ -19,16 +19,17 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 		fmt.Println("Endpoint Failed")
 		return []*bitfinex.Candle{}, err
 	}
-
+	fmt.Println(data)
 	fmt.Println(reflect.TypeOf(data))
-	resolution, err := bitfinex.CandleResolutionFromString(timeframe)
-  num := len(data)
-  res = make([]*bitfinex.Candle, num)
-
-  for i, candle := range data {
+	fmt.Println(reflect.TypeOf(data[0]))
+	// resolution, err := bitfinex.CandleResolutionFromString(timeframe)
+  // num := len(data)
+  // res = make([]*bitfinex.Candle, num)
+	//
+  for _, candle := range data {
 		  fmt.Println(reflect.TypeOf(candle))
-			cdl, err := bitfinex.NewCandleFromRaw(symbol, resolution, candle)
-			res[i] = cdl
+	// 		cdl, err := bitfinex.NewCandleFromRaw(symbol, resolution, candle)
+	// 		res[i] = cdl
   }
 
 	return res, nil
