@@ -41,5 +41,5 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 			candles = append(candles, candle)
   }
 
-	return res, nil
+	return candles, nil
 }
