@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/dannyluong408/bitfinex-api-go/v2/rest"
+	"reflect"
 )
 
 var (
@@ -28,6 +29,7 @@ func main() {
 	end := int64(1516867200000)
 
 	result, err := c.Candles.GetOHLCV(timeframe, symbol, start, end)
+	fmt.Println(reflect.TypeOf(result))
 	fmt.Println(result)
 	if err != nil {
 		fmt.Println("Error!")
