@@ -5,6 +5,8 @@ import (
 	"net/url"
 	"path"
 	"strconv"
+	"fmt"
+	"reflect"
 )
 
 type CandleService struct {
@@ -19,19 +21,25 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 	if err != nil {
 		return []*Candle{}, err
 	}
+
+	fmt.Println(reflect.TypeOf(data))
+	fmt.Println(data)
+	fmt.Println(reflect.TypeOf(data[0]))
+	fmt.Println(data[0])
+	fmt.Println(len(data))
   num := len(data)
   res = make([]*Candle, num)
-  for i := 0; i < num; i++ {
-    item := data.GetIndex(i)
-    res[i] = &Candle{
-			Timestamp:                item.GetIndex(0).MustInt64(),
-			Open:                     item.GetIndex(1).MustString(),
-			High:                     item.GetIndex(2).MustString(),
-			Low:                      item.GetIndex(3).MustString(),
-			Close:                    item.GetIndex(4).MustString(),
-			Volume:                   item.GetIndex(5).MustString(),
-		}
-  }
+  // for i := 0; i < num; i++ {
+  //   item := data.GetIndex(i)
+  //   res[i] = &Candle{
+	// 		Timestamp:                item.GetIndex(0).MustInt64(),
+	// 		Open:                     item.GetIndex(1).MustString(),
+	// 		High:                     item.GetIndex(2).MustString(),
+	// 		Low:                      item.GetIndex(3).MustString(),
+	// 		Close:                    item.GetIndex(4).MustString(),
+	// 		Volume:                   item.GetIndex(5).MustString(),
+	// 	}
+  // }
 	return res, nil
 }
 
