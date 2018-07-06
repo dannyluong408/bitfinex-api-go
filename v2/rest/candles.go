@@ -35,8 +35,8 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 
   for i := 0; i < num; i++ {
 			fields := strings.Fields(fmt.Sprintf("%v", data[i]))
-			for _, var := range fields{
-				fmt.Println(var)
+			for _, res := range fields{
+				fmt.Println(res)
 			}
 			res[i] = &bitfinex.Candle{
 				Symbol:     symbol,
