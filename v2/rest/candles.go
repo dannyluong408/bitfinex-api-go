@@ -30,9 +30,9 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 	fmt.Println("5:")
 	fmt.Println(data[0])
 
-  // num := len(rawdata)
+  num := len(data)
   res = make([]*Candle, num)
-	res[0] = data[0]
+	res[0] = data[0].(Candle)
 
 	fmt.Println(res[0])
 	fmt.Println(res[0].Timestamp)
