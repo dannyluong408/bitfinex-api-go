@@ -2,12 +2,7 @@ package main
 
 import (
 	"flag"
-	"log"
-	"os"
-	"strconv"
 	"fmt"
-
-	"github.com/dannyluong408/bitfinex-api-go/v2"
 	"github.com/dannyluong408/bitfinex-api-go/v2/rest"
 )
 
@@ -29,8 +24,8 @@ func main() {
 	fmt.Println("Testing...")
 	timeframe := "1m"
 	symbol := "tBTCUSD"
-	start := 516435200000
-	end := 1516867200000
+	start := int64(516435200000)
+	end := int64(1516867200000)
 
 	result, err := c.Candles.GetOHLCV(timeframe, symbol, start, end)
 	fmt.Println(result)
