@@ -33,13 +33,14 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
   num := len(rawdata)
   res = make([]*Candle, num)
   for i := 0; i < num; i++ {
+		data = rawdata[i]
     res[i] = &Candle{
-			Timestamp:                i64ValOrZero(rawdata[0]),
-			Open:                     sValOrEmpty(rawdata[1]),
-			High:                     sValOrEmpty(rawdata[2]),
-			Low:                      sValOrEmpty(rawdata[3]),
-			Close:                    sValOrEmpty(rawdata[4]),
-			Volume:                   sValOrEmpty(rawdata[5]),
+			Timestamp:                i64ValOrZero(data[0]),
+			Open:                     sValOrEmpty(data[1]),
+			High:                     sValOrEmpty(data[2]),
+			Low:                      sValOrEmpty(data[3]),
+			Close:                    sValOrEmpty(data[4]),
+			Volume:                   sValOrEmpty(data[5]),
 		}
   }
 	return res, nil
