@@ -38,7 +38,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 				return []*bitfinex.Candle{}, err
 			}
 			fmt.Println(candle)
-			candles = append(candles, candle)
+			candles = append(candles, *candle)
   }
 
 	return candles, nil
