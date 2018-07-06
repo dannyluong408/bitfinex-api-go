@@ -1,7 +1,7 @@
 package rest
 
 import (
-	"github.com/dannyluong408/bitfinex-api-go/v2"
+	bitfinex as "github.com/dannyluong408/bitfinex-api-go/v2"
 	"fmt"
 )
 
@@ -32,9 +32,9 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
   num := len(rawdata)
   res = make([]*Candle, num)
   for i := 0; i < num; i++ {
-		data = rawdata[i]
+		data := rawdata[i]
     res[i] = &Candle{
-			Timestamp:                i64ValOrZero(data[0]),
+			Timestamp:                bitfinex.i64ValOrZero(data[0]),
 			Open:                     sValOrEmpty(data[1]),
 			High:                     sValOrEmpty(data[2]),
 			Low:                      sValOrEmpty(data[3]),
