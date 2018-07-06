@@ -36,7 +36,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
   for i := 0; i < num; i++ {
 			fmt.Println(data[i])
 
-			s := make([]string, 6))
+			s := make([]string, 6)
 			for i, v := range data[i] {
 			    s[i] = fmt.Sprint(v)
 			}
