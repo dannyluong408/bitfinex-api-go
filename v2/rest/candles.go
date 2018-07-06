@@ -35,7 +35,8 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 
   for i := 0; i < num; i++ {
 			fmt.Println(data[i])
-			converted := data[i].(string)
+			converted := data[i].([]string)
+			fmt.Println(converted)
 			trimmed := converted[1:len(converted)-1]
 			fields := strings.Fields(fmt.Sprintf("%v", trimmed))
 			fmt.Println(fields)
