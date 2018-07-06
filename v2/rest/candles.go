@@ -3,6 +3,8 @@ package rest
 import (
 	"fmt"
 	"reflect"
+	"strings"
+	"github.com/dannyluong408/bitfinex-api-go/v2"
 )
 
 type CandleService struct {
@@ -32,22 +34,18 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 
   num := len(data)
   res = make([]*Candle, num)
-	res[0] = data[0].(Candle)
 
-	fmt.Println(res[0])
-	fmt.Println(res[0].Timestamp)
-
-  // for i := 0; i < num; i++ {
-	// 	data := rawdata[i]
-  //   res[i] = &Candle{
-	// 		Timestamp:                bitfinex.i64ValOrZero(data[0]),
-	// 		Open:                     sValOrEmpty(data[1]),
-	// 		High:                     sValOrEmpty(data[2]),
-	// 		Low:                      sValOrEmpty(data[3]),
-	// 		Close:                    sValOrEmpty(data[4]),
-	// 		Volume:                   sValOrEmpty(data[5]),
-	// 	}
-  // }
+  for i := 0; i < num; i++ {
+		words := strings.Fields(rawdata[i])
+    res[i] = &Candle{
+			Timestamp:                types.i64ValOrZero(words[0]),
+			Open:                     types.sValOrEmpty(words[1]),
+			High:                     types.sValOrEmpty(words[2]),
+			Low:                      types.sValOrEmpty(words[3]),
+			Close:                    types.sValOrEmpty(words[4]),
+			Volume:                   types.sValOrEmpty(words[5]),
+		}
+  }
 	return res, nil
 }
 
