@@ -61,3 +61,7 @@ type Candle struct {
 	Close                    string `json:"close"`
 	Volume                   string `json:"volume"`
 }
+
+func describe(i interface{}) {
+	fmt.Printf("(%v, %T)\n", i, i)
+}
