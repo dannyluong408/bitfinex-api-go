@@ -1,9 +1,8 @@
 package rest
 
 import (
-	"github.com/dannyluong408/bitfinex-api-go/utils"
+	"github.com/dannyluong408/bitfinex-api-go/v2"
 	"fmt"
-	"reflect"
 )
 
 type CandleService struct {
