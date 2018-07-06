@@ -24,7 +24,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
   for i := 0; i < num; i++ {
     item := data.GetIndex(i)
     res[i] = &Candle{
-			Timestamp:                 item.GetIndex(0).MustInt64(),
+			Timestamp:                item.GetIndex(0).MustInt64(),
 			Open:                     item.GetIndex(1).MustString(),
 			High:                     item.GetIndex(2).MustString(),
 			Low:                      item.GetIndex(3).MustString(),
