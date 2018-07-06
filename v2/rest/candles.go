@@ -42,7 +42,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 				fmt.Println("NewCandleFromRaw Failed")
 				return []*bitfinex.Candle{}, err
 			}
-			res[i] = candle
+			res[i] = *candle
   }
 
 	return res, nil
