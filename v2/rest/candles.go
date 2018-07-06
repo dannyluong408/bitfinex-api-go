@@ -29,7 +29,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 		return []*bitfinex.Candle{}, err
 	}
 
-  candles = make([]*bitfinex.Candle, 0)
+  candles := make([]*bitfinex.Candle, 0)
 
   for _, c := range raw {
 			candle, err := bitfinex.NewCandleFromRaw(symbol, resolution, c.([]interface {}))
