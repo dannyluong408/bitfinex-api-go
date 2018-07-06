@@ -3,8 +3,6 @@ package rest
 import (
 	"fmt"
 	"github.com/dannyluong408/bitfinex-api-go/v2"
-	//"strings"
-	"strconv"
 )
 
 type CandleService struct {
@@ -39,7 +37,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 			converted := data[i].([]interface{})
 			fmt.Println(converted)
 
-			candle, err = bitfinex.NewCandleFromRaw(symbol, resolution, converted)
+			candle, err := bitfinex.NewCandleFromRaw(symbol, resolution, converted)
 			if err != nil {
 				fmt.Println("NewCandleFromRaw Failed")
 				return []*bitfinex.Candle{}, err
