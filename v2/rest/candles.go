@@ -19,6 +19,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 	data, err := p.Request(NewRequestWithMethod(endpoint, "GET"))
 
 	if err != nil {
+		fmt.Println("Endpoint Failed")
 		return []*Candle{}, err
 	}
 

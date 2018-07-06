@@ -26,7 +26,7 @@ func main() {
 	flag.Parse()
 
 	c := rest.NewClientWithURL(*api)
-
+	fmt.Println("Testing...")
 	timeframe := "1m"
 	symbol := "tBTCUSD"
 	start := 516435200000
