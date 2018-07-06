@@ -27,7 +27,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 
 	resolution, err := bitfinex.CandleResolutionFromString(timeframe)
 	if err != nil {
-		fmt.Println("Endpoint Failed2")
+		fmt.Println("Candle Resolution Failed")
 		return []*bitfinex.Candle{}, err
 	}
   num := len(data)
@@ -38,53 +38,13 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 
 			converted := data[i].([]interface{})
 			fmt.Println(converted)
-			fmt.Println(converted[0])
-			// trimmed := converted[1:len(converted)-1]
-			// fields := strings.Fields(fmt.Sprintf("%v", trimmed))
-			fields := [6]string{"hello","world","two","four","five"}
-			fmt.Println(fields)
 
-			timestamp, err := strconv.ParseInt(fields[0], 10, 64)
+			candle, err = bitfinex.NewCandleFromRaw(symbol, resolution, converted)
 			if err != nil {
-				fmt.Println("parse int ts failed")
+				fmt.Println("NewCandleFromRaw Failed")
 				return []*bitfinex.Candle{}, err
 			}
-			open, err := strconv.ParseFloat(fields[1], 64)
-			if err != nil {
-				fmt.Println("parse float open failed")
-				return []*bitfinex.Candle{}, err
-			}
-			high, err := strconv.ParseFloat(fields[2], 64)
-			if err != nil {
-				fmt.Println("parse float high failed")
-				return []*bitfinex.Candle{}, err
-			}
-			low, err := strconv.ParseFloat(fields[3], 64)
-			if err != nil {
-				fmt.Println("parse float low failed")
-				return []*bitfinex.Candle{}, err
-			}
-			close, err := strconv.ParseFloat(fields[4], 64)
-			if err != nil {
-				fmt.Println("parse float close failed")
-				return []*bitfinex.Candle{}, err
-			}
-			vol, err := strconv.ParseFloat(fields[5], 64)
-			if err != nil {
-					fmt.Println("parse float vol failed")
-					return []*bitfinex.Candle{}, err
-				}
-
-			res[i] = &bitfinex.Candle{
-				Symbol:     symbol,
-				Resolution: resolution,
-				MTS:        timestamp,
-				Open:       open,
-				Close:      close,
-				High:       high,
-				Low:        low,
-				Volume:     vol,
-			}
+			res[i] = candle
   }
 
 	return res, nil
