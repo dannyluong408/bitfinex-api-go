@@ -34,36 +34,37 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
   res = make([]*bitfinex.Candle, num)
 
   for i := 0; i < num; i++ {
-			fields := strings.Fields(fmt.Sprintf("%v", data[i]))
-			fields = fields[1:len(fields)-1]
+			fmt.Println(data[i])
+			trimmed = data[i].(string)[1:len(data[i])-1]
+			fields := strings.Fields(fmt.Sprintf("%v", trimmed))
 			fmt.Println(fields)
-			
-			timestamp, err := strconv.ParseInt(fields[2], 10, 64)
+
+			timestamp, err := strconv.ParseInt(fields[0], 10, 64)
 			if err != nil {
 				fmt.Println("parse int ts failed")
 				return []*bitfinex.Candle{}, err
 			}
-			open, err := strconv.ParseFloat(fields[3], 64)
+			open, err := strconv.ParseFloat(fields[1], 64)
 			if err != nil {
 				fmt.Println("parse float open failed")
 				return []*bitfinex.Candle{}, err
 			}
-			high, err := strconv.ParseFloat(fields[4], 64)
+			high, err := strconv.ParseFloat(fields[2], 64)
 			if err != nil {
 				fmt.Println("parse float high failed")
 				return []*bitfinex.Candle{}, err
 			}
-			low, err := strconv.ParseFloat(fields[5], 64)
+			low, err := strconv.ParseFloat(fields[3], 64)
 			if err != nil {
 				fmt.Println("parse float low failed")
 				return []*bitfinex.Candle{}, err
 			}
-			close, err := strconv.ParseFloat(fields[6], 64)
+			close, err := strconv.ParseFloat(fields[4], 64)
 			if err != nil {
 				fmt.Println("parse float close failed")
 				return []*bitfinex.Candle{}, err
 			}
-			vol, err := strconv.ParseFloat(fields[7], 64)
+			vol, err := strconv.ParseFloat(fields[5], 64)
 			if err != nil {
 					fmt.Println("parse float vol failed")
 					return []*bitfinex.Candle{}, err
