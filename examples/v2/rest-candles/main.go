@@ -29,9 +29,9 @@ func main() {
 
 	result, err := c.Candles.GetOHLCV(timeframe, symbol, start, end)
 	fmt.Println(result)
-	// if err != nil {
-	// 	log.Fatalf("getting status: %s", err)
-	// }
+	if err != nil {
+		fmt.Println("Error!")
+	}
 	//
 	// if !available {
 	// 	log.Fatalf("API not available")
