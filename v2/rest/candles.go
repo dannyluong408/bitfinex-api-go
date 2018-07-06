@@ -39,11 +39,35 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 				fmt.Println(res)
 			}
 			timestamp, err := strconv.ParseInt(fields[2], 10, 64)
+			if err != nil {
+				fmt.Println("Endpoint Failed ts")
+				return []*bitfinex.Candle{}, err
+			}
 			open, err := strconv.ParseFloat(fields[3], 64)
+			if err != nil {
+				fmt.Println("Endpoint Failed open")
+				return []*bitfinex.Candle{}, err
+			}
 			high, err := strconv.ParseFloat(fields[4], 64)
+			if err != nil {
+				fmt.Println("Endpoint Failed high")
+				return []*bitfinex.Candle{}, err
+			}
 			low, err := strconv.ParseFloat(fields[5], 64)
+			if err != nil {
+				fmt.Println("Endpoint Failed low")
+				return []*bitfinex.Candle{}, err
+			}
 			close, err := strconv.ParseFloat(fields[6], 64)
+			if err != nil {
+				fmt.Println("Endpoint Failed close")
+				return []*bitfinex.Candle{}, err
+			}
 			vol, err := strconv.ParseFloat(fields[7], 64)
+			if err != nil {
+					fmt.Println("Endpoint Failed vol")
+					return []*bitfinex.Candle{}, err
+				}
 
 			res[i] = &bitfinex.Candle{
 				Symbol:     symbol,
