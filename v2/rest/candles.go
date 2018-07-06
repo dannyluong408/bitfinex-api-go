@@ -28,6 +28,10 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 	fmt.Println(data)
 	fmt.Println(reflect.TypeOf(data[0]))
 	resolution, err := bitfinex.CandleResolutionFromString(timeframe)
+	if err != nil {
+		fmt.Println("Endpoint Failed2")
+		return []*bitfinex.Candle{}, err
+	}
   num := len(data)
   res = make([]*bitfinex.Candle, num)
 
@@ -35,6 +39,10 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 			fmt.Println(i)
 		  fmt.Println(reflect.TypeOf(data[i]))
 			cdl, err := bitfinex.NewCandleFromRaw(symbol, resolution, data[i].([]interface {}))
+			if err != nil {
+				fmt.Println("Endpoint Failed3")
+				return []*bitfinex.Candle{}, err
+			}
 			res[i] = cdl
   }
 
