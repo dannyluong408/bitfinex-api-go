@@ -36,7 +36,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
   for i := 0; i < num; i++ {
 			fmt.Println(data[i])
 
-			s := make([]string, len(data[i]))
+			s := make([]string, 6))
 			for i, v := range data[i] {
 			    s[i] = fmt.Sprint(v)
 			}
@@ -45,7 +45,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 			// fmt.Println(converted)
 			// trimmed := converted[1:len(converted)-1]
 			// fields := strings.Fields(fmt.Sprintf("%v", trimmed))
-			fields := [5]string{"hello","world","two","four","five"}
+			fields := [6]string{"hello","world","two","four","five"}
 			fmt.Println(fields)
 
 			timestamp, err := strconv.ParseInt(fields[0], 10, 64)
