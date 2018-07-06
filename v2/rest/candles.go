@@ -3,6 +3,7 @@ package rest
 import (
 	"fmt"
 	"github.com/dannyluong408/bitfinex-api-go/v2"
+	"reflect"
 )
 
 type CandleService struct {
@@ -19,13 +20,15 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 		return []*Candle{}, err
 	}
 
+	fmt.Println(reflect.TypeOf(data))
 	resolution, err := bitfinex.CandleResolutionFromString(timeframe)
   num := len(data)
   res = make([]*bitfinex.Candle, num)
 
   for i, candle := range data {
+		  fmt.Println(reflect.TypeOf(candle))
 			output, err = bitfinex.NewCandleFromRaw(symbol, resolution, candle)
-			res[i] := output
+			res[i] = output
   }
 
 	return res, nil
