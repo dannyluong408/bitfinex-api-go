@@ -3,7 +3,7 @@ package rest
 import (
 	"fmt"
 	"github.com/dannyluong408/bitfinex-api-go/v2"
-	//"strings"
+	"strings"
 	"strconv"
 )
 
