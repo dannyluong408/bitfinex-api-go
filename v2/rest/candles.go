@@ -3,7 +3,7 @@ package rest
 import (
 	"fmt"
 	"github.com/dannyluong408/bitfinex-api-go/v2"
-	"strings"
+	//"strings"
 	"strconv"
 )
 
@@ -36,11 +36,12 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
   for i := 0; i < num; i++ {
 			fmt.Println(data[i])
 
-			converted := data[i].(string)
+			converted := data[i].([]interface{})
 			fmt.Println(converted)
-			trimmed := converted[1:len(converted)-1]
-			fields := strings.Fields(fmt.Sprintf("%v", trimmed))
-			//fields := [6]string{"hello","world","two","four","five"}
+			fmt.Println(converted[0])
+			// trimmed := converted[1:len(converted)-1]
+			// fields := strings.Fields(fmt.Sprintf("%v", trimmed))
+			fields := [6]string{"hello","world","two","four","five"}
 			fmt.Println(fields)
 
 			timestamp, err := strconv.ParseInt(fields[0], 10, 64)
