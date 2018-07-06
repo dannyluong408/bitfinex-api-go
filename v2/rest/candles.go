@@ -27,7 +27,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 
   for i, candle := range data {
 		  fmt.Println(reflect.TypeOf(candle))
-			cdl, err = bitfinex.NewCandleFromRaw(symbol, resolution, candle)
+			cdl, err := bitfinex.NewCandleFromRaw(symbol, resolution, candle)
 			res[i] = cdl
   }
 
