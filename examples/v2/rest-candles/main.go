@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"fmt"
 
-	"github.com/bitfinexcom/bitfinex-api-go/v2"
-	"github.com/bitfinexcom/bitfinex-api-go/v2/rest"
+	"github.com/dannyluong408/bitfinex-api-go/v2"
+	"github.com/dannyluong408/bitfinex-api-go/v2/rest"
 )
 
 var (
