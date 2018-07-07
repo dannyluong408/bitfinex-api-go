@@ -12,7 +12,7 @@ type CandleService struct {
 // Gets KLine History using v2 api
 func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, end int64) (res []*bitfinex.Candle, err error) {
   endpoint := "candles/trade:" + timeframe + ":" + symbol + "/hist?start=" + string(start) + "&end=" + string(end)
-	
+	fmt.Println("Endpoint called: %s", endpoint)
 	raw, err := p.Request(NewRequestWithMethod(endpoint, "GET"))
 
 	if err != nil {
@@ -35,6 +35,7 @@ func (p *CandleService) GetOHLCV(timeframe string, symbol string, start int64, e
 				return []*bitfinex.Candle{}, err
 			}
 			//fmt.Println(candle)
+			fmt.Println("Candle MTS (in milisecs?): %s", candle.MTS)
 			candles = append(candles, candle)
   }
 
