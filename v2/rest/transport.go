@@ -49,7 +49,7 @@ func (h HttpTransport) Request(req Request) ([]interface{}, error) {
 		if resp != nil {
 			return nil, fmt.Errorf("%v", err)
 		} else {
-			return nil, fmt.Errorf("could not parse response: %s", resp.Response.Status)
+			return nil, fmt.Errorf("could not parse response")
 		}
 
 	}
